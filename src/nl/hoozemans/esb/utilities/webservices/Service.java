@@ -1,0 +1,49 @@
+package nl.hoozemans.esb.utilities.webservices;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Service extends NamespaceBase
+{
+	public Service( Base parent, String source )
+	throws Exception
+	{
+		super(parent, source, null);
+		parse();
+	}
+	
+	public boolean replaceNamespacePrefix( String oldPrefix, String newPrefix )
+	throws Exception
+	{
+		if( getNamespaceByPrefix(oldPrefix) != null )
+			return false;
+		
+		return replaceNamespacePrefixInSource(oldPrefix, newPrefix);
+	}	
+
+	public boolean parse()
+	throws Exception
+	{
+		return super.parse();
+	}
+
+	public static List<Service> extract(Base parent, String from)
+	throws Exception
+	{
+		List<Service> result = new ArrayList<Service>();
+		
+		String pattern = "<" + PATTERN_ANYNSPREFIX + "Service(.*?)>(.*?)</" + PATTERN_ANYNSPREFIX + "Service>";
+		Pattern regex = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE | Pattern.DOTALL );
+		Matcher matcher = regex.matcher(from);
+		
+		while( matcher.find() )
+		{
+			Service service = new Service(parent, matcher.group(0));
+			result.add(service);
+		}
+		
+		return result;
+	}
+}
