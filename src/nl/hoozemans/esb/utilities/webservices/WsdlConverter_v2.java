@@ -290,18 +290,16 @@ public class WsdlConverter_v2
 	throws Exception
 	{
 		String[] paths = {
-			"/ws02/WS02_NewCustomerRegistration.wsdl",
-			"/ws03/WS03_UpdateCustomer.wsdl",
-			"/ws08/WS08_RetrieveCustomerDetails.wsdl"
+			"/folder/wsdl.wsdl",
 		};
 		
 		List<String> notCompleted = new ArrayList<String>();
 		
 		for( String path : paths )
 		{
-			String origPath = "Z:/workspaces/wmb8/jumbo/MDM/MDM01_CDM_CustomerUpdateDocs/xsd/original" + path;
-			String integralPath = "Z:/workspaces/wmb8/jumbo/MDM/MDM01_CDM_CustomerUpdateDocs/xsd/integrated" + path;
-			String splitPath = "Z:/workspaces/wmb8/jumbo/MDM/MDM01_CDM_CustomerUpdateDocs/xsd/split" + path;
+			String origPath = "C:/temp/folder/xsd/original" + path;
+			String integralPath = "C:/temp/folder/xsd/integrated" + path;
+			String splitPath = "C:/temp/folder/xsd/split" + path;
 			
 			try
 			{
